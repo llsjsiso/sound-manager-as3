@@ -53,7 +53,7 @@ package pl.szataniol.sound.identifiers {
 
 		public function unmute() : void {
 
-			_muted = true;
+			_muted = false;
 			handleMutedChanged();
 		}
 
