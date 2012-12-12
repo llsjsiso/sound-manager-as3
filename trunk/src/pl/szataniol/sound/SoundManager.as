@@ -30,9 +30,8 @@ package pl.szataniol.sound {
 
 		private var _sounds : Dictionary = new Dictionary();
 		private var _groups : Dictionary = new Dictionary();
-		private var _sequences: Dictionary = new Dictionary();
-
-
+		private var _sequences : Dictionary = new Dictionary();
+		
 		public static function getInstance() : SoundManager {
 
 			return (_instance || (_instance = new SoundManager()));
@@ -93,6 +92,22 @@ package pl.szataniol.sound {
 		public function startLoading() : void {
 
 			_loader.load();
+		}
+		
+		public function mute():void {
+			
+			for each (var sound : SoundIdentifier in _sounds) {
+				
+				sound.mute();
+			}
+		}
+	
+		public function unmute():void {
+			
+			for each (var sound : SoundIdentifier in _sounds) {
+				
+				sound.unmute();
+			}
 		}
 
 		private function _loadSound(sound : SoundIdentifier) : void {

@@ -76,21 +76,34 @@ package pl.szataniol.sound.identifiers.concrete {
 
 			var sound : SoundIdentifier = _sounds[_currentSoundId];
 			var soundChannelWrapper : SoundChannelWrapper = sound.play(_playbackProperties);
-			_activeSoundChannels.push(soundChannelWrapper);
-			soundChannelWrapper.soundChannel.addEventListener(Event.SOUND_COMPLETE, soundCompletedHandler);
+
+			if (soundChannelWrapper) {
+
+				_activeSoundChannels.push(soundChannelWrapper);
+				soundChannelWrapper.soundChannel.addEventListener(Event.SOUND_COMPLETE, soundCompletedHandler);
+			} else {
+				
+				_currentSoundId++;
+				
+				if (_currentSoundId < _sounds.length) {
+
+					playNext();
+				}
+			}
 
 		}
 
 		private function soundCompletedHandler(event : Event) : void {
-			
+
 			_currentSoundId++;
 
 			handleSoundCompleted(SoundChannel(event.target), _currentSoundId == _sounds.length);
 
-			if(_currentSoundId < _sounds.length) {
-				
-				playNext();			
-			} 
+			if (_currentSoundId < _sounds.length) {
+
+				playNext();
+			}
 		}
+
 	}
 }
