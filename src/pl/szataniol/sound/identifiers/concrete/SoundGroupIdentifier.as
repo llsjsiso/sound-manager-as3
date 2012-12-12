@@ -77,7 +77,7 @@ package pl.szataniol.sound.identifiers.concrete {
 					var randomSound : SoundIdentifier = _sounds[Math.floor(Math.random() * _sounds.length)];
 					var soundChannelWrapper : SoundChannelWrapper = randomSound.play(playbackProperties);
 
-					if (soundChannelWrapper.soundChannel) {
+					if (soundChannelWrapper && soundChannelWrapper.soundChannel) {
 
 						soundChannelWrapper.soundChannel.addEventListener(Event.SOUND_COMPLETE, soundCompletedHandler);
 						_activeSoundChannels.push(soundChannelWrapper);

@@ -45,10 +45,15 @@ package pl.szataniol.sound.identifiers.concrete {
 		}
 
 		public function play(playbackProperties : PlaybackProperties = null) : SoundChannelWrapper {
-			
+	
 			if(!_ready) {
 				
 				trace("Sound " + identifier + " is not ready yet!"); 
+				return null;
+			}
+			
+			if(_muted) {
+				
 				return null;
 			}
 			
