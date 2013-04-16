@@ -45,7 +45,7 @@ package pl.szataniol.sound.identifiers.concrete {
 		}
 
 		public function play(playbackProperties : PlaybackProperties = null) : SoundChannelWrapper {
-	
+
 			if(!_ready) {
 				
 				trace("Sound " + identifier + " is not ready yet!"); 
@@ -94,13 +94,18 @@ package pl.szataniol.sound.identifiers.concrete {
 			
 			var soundChannel : SoundChannel = _sound.play(playbackProperties.startTime, playbackProperties.loops, playbackProperties.soundTransform);
 			soundChannel.addEventListener(Event.SOUND_COMPLETE, soundCompleteHandler);
-			return new SoundChannelWrapper(soundChannel, playbackProperties);
+			return new SoundChannelWrapper(identifier, soundChannel, playbackProperties);
 		}
 
 		private function soundCompleteHandler(event : Event) : void {
 
 			handleSoundCompleted(SoundChannel(event.target), true);
 		}
+
+        public function get length():Number {
+
+            return _sound.length;
+        }
 	}
 }
 

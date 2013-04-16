@@ -28,10 +28,10 @@ package pl.szataniol.sound.playback {
 			}
 
 			_playbackMode = playbackMode;
-			_volume = vars.volume || 1;
-			_startTime = vars.startTime || 0;
-			_loops = vars.loops || 0;
-			_panning = vars.panning || 0;
+			_volume = isNaN(vars.volume) ? 1 : vars.volume;
+			_startTime = isNaN(vars.startTime) ? 0 : vars.startTime;
+			_loops = isNaN(vars.loops) ? 0 : vars.loops;
+			_panning = isNaN(vars.panning) ? 0 : vars.panning;
 		}
 
 		public function get volume() : Number {
@@ -53,8 +53,12 @@ package pl.szataniol.sound.playback {
 		}
 
 		public function get soundTransform() : SoundTransform {
-			
-			return new SoundTransform(volume, _panning);
+
+			return new SoundTransform(_volume, _panning);
 		}
-	}
+
+        public function get panning():Number {
+            return _panning;
+        }
+    }
 }

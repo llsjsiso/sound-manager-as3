@@ -74,7 +74,10 @@ package pl.szataniol.sound.identifiers {
 
 			for (var i : int = 0; i < _activeSoundChannels.length; i++) {
 
-				_activeSoundChannels[i].soundChannel.stop();
+                if(_activeSoundChannels[i].soundChannel) {
+
+                    _activeSoundChannels[i].soundChannel.stop();
+                }
 			}
 
 			_activeSoundChannels.splice(0, _activeSoundChannels.length);

@@ -65,8 +65,14 @@ package pl.szataniol.sound.resources.concrete {
 		}
 
 		override protected function createSoundInstance() : void {
-			
-			_sound = new (loader.getClass(_assetName) as Class) as Sound;
+				
+			try {
+					
+				_sound = new (loader.getClass(_assetName) as Class) as Sound;
+			} catch(e:Error) {
+				
+				trace("missing sound " + _libraryPath, _assetName);
+			}
 		}
 	}
 }
