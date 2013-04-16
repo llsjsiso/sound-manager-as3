@@ -24,7 +24,8 @@ package pl.szataniol.sound.resources {
 		public final function handleReady() : void {
 			
 			createSoundInstance();
-			dispatchEvent(new Event(Event.COMPLETE));
+			
+ 			dispatchEvent(new Event(Event.COMPLETE));
 		}
 		
 		public function handleLoadingStart():void {

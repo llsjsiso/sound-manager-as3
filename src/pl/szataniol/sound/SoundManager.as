@@ -21,12 +21,13 @@ package pl.szataniol.sound {
 
 	[Event(name="soundsLoadingProgress", type="pl.szataniol.sound.events.SoundsLoadingProgressEvent")]
 	[Event(name="soundsLoadingComplete", type="pl.szataniol.sound.events.SoundsLoadingProgressEvent")]
+	[Event(name="soundLoadingError", type="pl.szataniol.sound.events.SoundsLoadingProgressEvent")]
 
 	public class SoundManager extends EventDispatcher {
 
 		private static var _instance : SoundManager;
 
-		private var _loader : LoaderMax = new LoaderMax({name:"soundsLoader", onProgress:progressHandler, onComplete:completeHandler});
+		private var _loader : LoaderMax = new LoaderMax({auditSize :false, name:"soundsLoader", onProgress:progressHandler, onComplete:completeHandler, onError:errorHandler});
 
 		private var _sounds : Dictionary = new Dictionary();
 		private var _groups : Dictionary = new Dictionary();
@@ -155,5 +156,12 @@ package pl.szataniol.sound {
 
 			dispatchEvent(new SoundsLoadingProgressEvent(SoundsLoadingProgressEvent.COMPLETE));
 		}
+
+        private function errorHandler(event:LoaderEvent):void {
+
+            var errorEvent:SoundsLoadingProgressEvent = new SoundsLoadingProgressEvent(SoundsLoadingProgressEvent.ERROR);
+            errorEvent.error = event.text;
+            dispatchEvent(errorEvent);
+        }
 	}
 }
